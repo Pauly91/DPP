@@ -1,0 +1,7 @@
+{
+    "dataBase":{
+        "type": "csv",
+        "path": "database/PUMS.csv"
+    }
+    
+}
