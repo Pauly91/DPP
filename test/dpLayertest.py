@@ -37,7 +37,7 @@ class dpLayerTest(unittest.TestCase):
         smDP = SmartNoiseDP(config)
         query = 'SELECT married, AVG(income) AS income, COUNT(*) AS n FROM PUMS.PUMS GROUP BY married'
         result = smDP.executeQuery(query)
-        self.assertEqual(smDP.reader.engine, 'Pandas')
+        self.assertEqual(len(result), 3)
 
 
 if __name__ == '__main__':

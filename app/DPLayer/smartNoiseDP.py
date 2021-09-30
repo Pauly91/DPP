@@ -11,7 +11,7 @@ class SmartNoiseDP(DPBase):
         self.meta = CollectionMetadata.from_file(configuration['metadata'])
         # epsilon is 0.1, delta is 10E-16
         self.privacyParameter = {
-            "epsilon": 0.01,
+            "epsilon": 1,
             "delta": 10E-16
         }
 
