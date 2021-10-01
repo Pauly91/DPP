@@ -1,7 +1,5 @@
 {
-    "dataBase":{
-        "type": "csv",
-        "path": "database/PUMS.csv"
-    }
-    
+    "type":"csv",
+    "dbpath":"PUMS.csv",
+    "metadata": "PUMS_row.yaml"
 }

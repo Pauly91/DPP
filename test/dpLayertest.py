@@ -13,7 +13,7 @@ class dpLayerTest(unittest.TestCase):
     def test_readerFactory(self):
         config = {
             "type": "csv",
-            "path":  os.path.join(TESTDATA_DIRECTORY, 'PUMS.csv'),
+            "dbpath":  os.path.join(TESTDATA_DIRECTORY, 'PUMS.csv'),
             "metadata": os.path.join(TESTDATA_DIRECTORY, 'PUMS_row.yaml')
         }
         reader = DBReaderFactory(config)
@@ -22,7 +22,7 @@ class dpLayerTest(unittest.TestCase):
     def test_smartNoiseDPClass(self):
         config = {
             "type": "csv",
-            "path":  os.path.join(TESTDATA_DIRECTORY, 'PUMS.csv'),
+            "dbpath":  os.path.join(TESTDATA_DIRECTORY, 'PUMS.csv'),
             "metadata": os.path.join(TESTDATA_DIRECTORY, 'PUMS_row.yaml')
         }
         smDP = SmartNoiseDP(config)
@@ -31,7 +31,7 @@ class dpLayerTest(unittest.TestCase):
     def test_smartNoiseQuery(self):
         config = {
             "type": "csv",
-            "path":  os.path.join(TESTDATA_DIRECTORY, 'PUMS.csv'),
+            "dbpath":  os.path.join(TESTDATA_DIRECTORY, 'PUMS.csv'),
             "metadata": os.path.join(TESTDATA_DIRECTORY, 'PUMS_row.yaml')
         }
         smDP = SmartNoiseDP(config)

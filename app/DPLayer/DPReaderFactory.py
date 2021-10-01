@@ -9,7 +9,7 @@ DIRECTORY = os.path.join(os.path.dirname(__file__), 'data')
 
 def DBReaderFactory(config):
     type = config['type']
-    path = config['path']
+    path = config['dbpath']
     metadata = config['metadata']
     if type == 'csv':
         csv_file = pd.read_csv(path)
