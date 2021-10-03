@@ -23,7 +23,7 @@ class appTest(unittest.TestCase):
         jsonData = response.get_json()
         self.assertEqual(['married', 'income', 'n'], jsonData[0])
 
-    def test_app_exception_1(self):
+    def test_app_exception_whitelist(self):
 
         response = self.app.get('/',
                                 data=json.dumps(dict(
@@ -34,7 +34,7 @@ class appTest(unittest.TestCase):
         self.assertEqual(
             "Expression 'HELLO' not found in the allowed list: (,ABS,ACOS,ASIN,ATAN,AVG,CASE,CEILING,CHOOSE,COS,COUNT,DEGREES,DENSE_RANK,EXP,FALSE,FLOOR,IIF,LOG,LOG10,MAX,MIN,NEWID,NULL,PERCENTILE_CONT,PERCENTILE_DISC,PI,POWER,RAND,RANDOM,RANK,ROUND,ROW_NUMBER,SIGN,SIN,SQRT,SQUARE,STD,STDDEV,SUM,TAN,TRUE,VAR,VARIANCE,-,*,STRING,INTEGER_VALUE,DECIMAL_VALUE,QN2,IDENT", jsonData[0])
 
-    def test_app_exception_2(self):
+    def test_app_exception_invalidQuery(self):
 
         response = self.app.get('/',
                                 data=json.dumps(dict(

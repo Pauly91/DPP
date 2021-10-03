@@ -2,29 +2,28 @@ from flask import Flask
 from flask_restful import Resource, Api
 from flask import request, jsonify
 
-from app.DPLayer.smartNoiseDP import SmartNoiseDP
+from app.DPLayer.SmartNoise.smartNoiseDP import SmartNoiseDP
 from app.configuration.connector import getConfiguration
 from app.utils.sqlParser import SQLParser
 
+config = getConfiguration()
+dpLayer = SmartNoiseDP(config)
+sqlParser = SQLParser(config['privacy']['whitelist'])
+
 
 class queryHandler(Resource):
-    def __init__(self):
-        config = getConfiguration()
-        self.dpLayer = SmartNoiseDP(config)
-        self.sqlParser = SQLParser(config['privacy']['whitelist'])
-
     def get(self):
 
         json_data = request.get_json(force=True)
         query = json_data['query']
 
         try:
-            self.sqlParser.parse(query)
+            sqlParser.parse(query)
         except Exception as e:
             return jsonify(e.args)
 
         try:
-            result = self.dpLayer.executeQuery(query)
+            result = dpLayer.executeQuery(query)
         except Exception as e:
             result = e.args
 

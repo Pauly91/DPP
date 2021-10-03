@@ -1,6 +1,7 @@
 
 from app.DPLayer.DPBase import DPBase
-from app.DPLayer.smartNoiseReaderFactory import SNReaderFactory
+from app.DPLayer.SmartNoise.smartNoiseReaderFactory import SNReaderFactory
+
 from opendp.smartnoise.metadata import CollectionMetadata
 from opendp.smartnoise.sql import PrivateReader
 

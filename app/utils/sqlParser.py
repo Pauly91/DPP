@@ -1,5 +1,4 @@
 import sqlparse
-from sqlparse.tokens import Newline
 
 
 class SQLParser():
