@@ -15,10 +15,10 @@ class appTest(unittest.TestCase):
 
     def test_appPost(self):
 
-        response = self.app.post('/',
-                                 data=json.dumps(dict(
-                                     query='SELECT married, AVG(income) AS income, COUNT(*) AS n FROM PUMS.PUMS GROUP BY married')),
-                                 content_type='application/json')
+        response = self.app.get('/',
+                                data=json.dumps(dict(
+                                    query='SELECT married, AVG(income) AS income, COUNT(*) AS n FROM PUMS.PUMS GROUP BY married')),
+                                content_type='application/json')
         self.assertEqual(response.status_code, 200)
         jsonData = response.get_json()
         self.assertEqual(['married', 'income', 'n'], jsonData[0])

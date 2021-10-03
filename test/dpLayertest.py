@@ -13,45 +13,40 @@ import os
 import sqlparse
 
 TESTDATA_DIRECTORY = os.path.join(os.path.dirname(__file__), 'data')
+config = {
+    "type": "csv",
+    "dbpath":  os.path.join(TESTDATA_DIRECTORY, 'PUMS.csv'),
+    "metadata": os.path.join(TESTDATA_DIRECTORY, 'PUMS_row.yaml'),
+    "privacy":
+    {
+        "epsilon": 1,
+        "delta": 10E-16,
+        "whitelist": "(,ABS,ACOS,ASIN,ATAN,AVG,CASE,CEILING,CHOOSE,COS,COUNT,DEGREES,DENSE_RANK,EXP,FALSE,FLOOR,IIF,LOG,LOG10,MAX,MIN,NEWID,NULL,PERCENTILE_CONT,PERCENTILE_DISC,PI,POWER,RAND,RANDOM,RANK,ROUND,ROW_NUMBER,SIGN,SIN,SQRT,SQUARE,STD,STDDEV,SUM,TAN,TRUE,VAR,VARIANCE,-,*,STRING,INTEGER_VALUE,DECIMAL_VALUE,QN2,IDENT"
+    }
+}
 
 
 class dpLayerTest(unittest.TestCase):
 
     def test_readerFactory(self):
-        config = {
-            "type": "csv",
-            "dbpath":  os.path.join(TESTDATA_DIRECTORY, 'PUMS.csv'),
-            "metadata": os.path.join(TESTDATA_DIRECTORY, 'PUMS_row.yaml')
-        }
+
         reader = SNReaderFactory(config)
         self.assertEqual(reader.engine, 'Pandas')
 
     def test_smartNoiseDPClass(self):
-        config = {
-            "type": "csv",
-            "dbpath":  os.path.join(TESTDATA_DIRECTORY, 'PUMS.csv'),
-            "metadata": os.path.join(TESTDATA_DIRECTORY, 'PUMS_row.yaml')
-        }
+
         smDP = SmartNoiseDP(config)
-        self.assertEqual(smDP.reader.engine, 'Pandas')
+        self.assertEqual(smDP.private_reader.engine, 'Pandas')
 
     def test_smartNoiseQuery(self):
-        config = {
-            "type": "csv",
-            "dbpath":  os.path.join(TESTDATA_DIRECTORY, 'PUMS.csv'),
-            "metadata": os.path.join(TESTDATA_DIRECTORY, 'PUMS_row.yaml')
-        }
+
         smDP = SmartNoiseDP(config)
         query = 'SELECT married, AVG(income) AS income, COUNT(*) AS n FROM PUMS.PUMS GROUP BY married'
         result = smDP.executeQuery(query)
         self.assertEqual(len(result), 3)
 
     def test_smartNoiseQuery_1(self):
-        config = {
-            "type": "csv",
-            "dbpath":  os.path.join(TESTDATA_DIRECTORY, 'PUMS.csv'),
-            "metadata": os.path.join(TESTDATA_DIRECTORY, 'PUMS_row.yaml')
-        }
+
         smDP = SmartNoiseDP(config)
         query = 'SELECT married, AVG(income) AS income, COUNT(*) AS n FROM PUMS.PUMS GROUP BY married'
         try:

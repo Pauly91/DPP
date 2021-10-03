@@ -6,6 +6,11 @@ from app.utils.sqlParser import SQLParser
 TESTDATA_DIRECTORY = os.path.join(os.path.dirname(__file__), 'data')
 
 
+class MyException(Exception):
+    def __str__(self) -> str:
+        return repr("Expression 'TEST' not found in the allowed list: sum,call")
+
+
 class utilitiesTest(unittest.TestCase):
     def test_parser(self):
 
@@ -18,8 +23,11 @@ class utilitiesTest(unittest.TestCase):
     def test_sqlParser_basic(self):
         query = 'SELECT married, test(income) AS income, COUNT(*) AS n FROM PUMS.PUMS GROUP BY married'
         sp = SQLParser("sum,call")
-        self.assertRaises(sp.parse(query), Exception(
-            "Expression TEST not found in the allowed list: sum,call"))
+        try:
+            sp.parse(query)
+        except Exception as err:
+            self.assertEqual(
+                err.args[0], "Expression 'TEST' not found in the allowed list: sum,call")
 
     def test_sqlParser_advanced(self):
         query = 'SELECT married, AVG(income) AS income, COUNT(*) AS n FROM PUMS.PUMS GROUP BY married'

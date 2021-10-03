@@ -14,11 +14,8 @@ class queryHandler(Resource):
         self.sqlParser = SQLParser(config['privacy']['whitelist'])
 
     def get(self):
-        return {"hello": "Hello Worldsadas"}
 
-    def post(self):
         json_data = request.get_json(force=True)
-
         query = json_data['query']
 
         try:
@@ -31,7 +28,7 @@ class queryHandler(Resource):
 
 app = Flask(__name__, instance_relative_config=True)
 
-# app.config.from_pyfile('config.py')
+app.config.from_pyfile('config.py')
 app.config.from_object('config')
 
 api = Api(app)
@@ -39,6 +36,5 @@ api.add_resource(queryHandler, '/')
 
 
 '''
-tuts: https://scotch.io/tutorials/getting-started-with-flask-a-python-microframework
-curl -d '{"query":"SELECT married, AVG(income) AS income, COUNT(*) AS n FROM PUMS.PUMS GROUP BY married"}' -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/
+curl -d '{"query":"SELECT married, AVG(income) AS income, COUNT(*) AS n FROM PUMS.PUMS GROUP BY married"}' -H "Content-Type: application/json" -X GET http://127.0.0.1:5000/
 '''
