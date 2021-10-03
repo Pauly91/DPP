@@ -14,9 +14,9 @@ Refer to this [link](https://docs.google.com/document/d/1Up2pG3Q17O37CDpZ5BMFxB0
 ## To Run the Project
 
 
-1. Create a python virtual environment 
+1. Create a python virtual environment. Refer to this [link](https://stackoverflow.com/questions/13855463/bash-mkvirtualenv-command-not-found) for any errors.
     ```
-    pip intall virtualenv
+    pip install virtualenv
     mkvirtualenv my-venv
     workon myenv
     ```
@@ -25,11 +25,11 @@ Refer to this [link](https://docs.google.com/document/d/1Up2pG3Q17O37CDpZ5BMFxB0
     ``` 
     pip3 install -r requirements.txt
     ```
-4. Run the app (Server is opened at: 'http://127.0.0.1:5000/' )
+4. Run the app (Server is opened at: 'http://127.0.0.1:5000/' and is running in development env with debug on)
    ``` 
    flask run 
    ```
-5. Do a Get call with the SQL queries:
+5. Do a GET call with the SQL queries:
    ```
     curl -d '{"query":"SELECT married, AVG(income) AS income, COUNT(*) AS n FROM PUMS.PUMS GROUP BY married"}' -H "Content-Type: application/json" -X GET http://127.0.0.1:5000/
    ```
