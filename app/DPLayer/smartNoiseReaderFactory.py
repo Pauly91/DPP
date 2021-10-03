@@ -7,7 +7,7 @@ import os
 DIRECTORY = os.path.join(os.path.dirname(__file__), 'data')
 
 
-def DBReaderFactory(config):
+def SNReaderFactory(config):
     type = config['type']
     path = config['dbpath']
     metadata = config['metadata']

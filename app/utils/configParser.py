@@ -9,5 +9,5 @@ class Parser:
             with open(configFile, "r") as jsonfile:
                 data = json.load(jsonfile)
         except Exception as error:
-            print(error)
+            raise("Error in reading configuration: " + str(error))
         return data

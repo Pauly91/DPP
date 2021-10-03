@@ -1,0 +1,11 @@
+{
+    "type":"csv",
+    "dbpath":"PUMS.csv",
+    "metadata": "PUMS_row.yaml",
+    "privacy":
+            {
+                "epsilon": 1,
+                "delta": 10E-16,
+                "whitelist":"(,ABS,ACOS,ASIN,ATAN,AVG,CASE,CEILING,CHOOSE,COS,COUNT,DEGREES,DENSE_RANK,EXP,FALSE,FLOOR,IIF,LOG,LOG10,MAX,MIN,NEWID,NULL,PERCENTILE_CONT,PERCENTILE_DISC,PI,POWER,RAND,RANDOM,RANK,ROUND,ROW_NUMBER,SIGN,SIN,SQRT,SQUARE,STD,STDDEV,SUM,TAN,TRUE,VAR,VARIANCE,-,*,STRING,INTEGER_VALUE,DECIMAL_VALUE,QN2,IDENT"
+            }
+}

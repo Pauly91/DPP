@@ -1,25 +1,41 @@
-
+from flask import Flask
 from flask_restful import Resource, Api
 from flask import request, jsonify
+
 from app.DPLayer.smartNoiseDP import SmartNoiseDP
 from app.configuration.connector import getConfiguration
+from app.utils.sqlParser import SQLParser
 
 
 class queryHandler(Resource):
     def __init__(self):
-        appConfig = getConfiguration('app')
-        privacyConfig = getConfiguration('privacy')
-        self.dpLayer = SmartNoiseDP(appConfig)
-        self.dpLayer.setPrivacyParameter(privacyConfig)
+        config = getConfiguration()
+        self.dpLayer = SmartNoiseDP(config)
+        self.sqlParser = SQLParser(config['privacy']['whitelist'])
 
     def get(self):
         return {"hello": "Hello Worldsadas"}
 
     def post(self):
         json_data = request.get_json(force=True)
-        print(json_data)
+
         query = json_data['query']
+
+        try:
+            self.sqlParser.parse(query)
+        except Exception as e:
+            return jsonify(e.args)
+
         return jsonify(self.dpLayer.executeQuery(query))
+
+
+app = Flask(__name__, instance_relative_config=True)
+
+# app.config.from_pyfile('config.py')
+app.config.from_object('config')
+
+api = Api(app)
+api.add_resource(queryHandler, '/')
 
 
 '''
