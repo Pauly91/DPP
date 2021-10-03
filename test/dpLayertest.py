@@ -1,16 +1,15 @@
 
-from warnings import catch_warnings
+
 from app.DPLayer.SmartNoise.smartNoiseReaderFactory import SNReaderFactory
 from app.DPLayer.SmartNoise.smartNoiseDP import SmartNoiseDP
-from opendp.smartnoise.sql.parse import QueryParser
 
+from opendp.smartnoise.sql.parse import QueryParser
 from opendp.smartnoise.sql import PandasReader, PrivateReader
 from opendp.smartnoise.metadata import CollectionMetadata
 from opendp.smartnoise.sql.parse import QueryParser
 
 import unittest
 import os
-import pandas as pd
 
 
 TESTDATA_DIRECTORY = os.path.join(os.path.dirname(__file__), 'data')
