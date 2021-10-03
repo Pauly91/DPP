@@ -32,13 +32,7 @@ class queryHandler(Resource):
 
 app = Flask(__name__, instance_relative_config=True)
 
-app.config.from_pyfile('config.py')
 app.config.from_object('config')
 
 api = Api(app)
 api.add_resource(queryHandler, '/')
-
-
-'''
-curl -d '{"query":"SELECT married, AVG(income) AS income, COUNT(*) AS n FROM PUMS.PUMS GROUP BY married"}' -H "Content-Type: application/json" -X GET http://127.0.0.1:5000/
-'''
