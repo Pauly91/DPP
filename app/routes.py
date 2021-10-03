@@ -23,7 +23,12 @@ class queryHandler(Resource):
         except Exception as e:
             return jsonify(e.args)
 
-        return jsonify(self.dpLayer.executeQuery(query))
+        try:
+            result = self.dpLayer.executeQuery(query)
+        except Exception as e:
+            result = e.args
+
+        return jsonify(result)
 
 
 app = Flask(__name__, instance_relative_config=True)
